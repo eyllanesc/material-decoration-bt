@@ -10,7 +10,7 @@ set -e
 echo 'Preparing build environment'
 cmake -DCMAKE_INSTALL_PREFIX=/usr .. > setup.log ||  echo 'Something went wrong while preparing the source. Check setup.log for more information.'
 
-echo 'Installing requires root privilege.'
+echo 'Installing requires root privileges.'
 echo 'Building.'
 sudo make -j4 install >> setup.log && echo 'Done (1/2)' || echo 'Something went wrong while building. Check setup.log for more information.'
 
