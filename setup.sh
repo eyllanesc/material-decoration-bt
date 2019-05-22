@@ -12,7 +12,7 @@ cmake -DCMAKE_INSTALL_PREFIX=/usr .. > setup.log ||  echo 'Something went wrong 
 
 echo 'Installing requires root privileges.'
 echo 'Building.'
-sudo make -j4 install >> setup.log && echo 'Done (1/2)' || echo 'Something went wrong while building. Check setup.log for more information.'
+sudo make -j4 install >> setup.log && echo 'Done building (1/2)' || echo 'Something went wrong while building. Check setup.log for more information.'
 
 echo 'Installing theme utilities'
 echo 'dest: /opt/material-decoration-bt'
@@ -20,7 +20,7 @@ echo 'dest: /opt/material-decoration-bt'
 set +e
 cd ..
 echo 'target:' "$(pwd)"
-sudo mkdir /opt || echo 'You may safely ignore errors in (2/2).'
+sudo mkdir /opt 2>/dev/null
 sudo cp -r $(pwd) /opt/
 echo 'Installed target source'
 sudo chmod +x /opt/material-decoration-bt/bt-opacity.sh
@@ -28,8 +28,6 @@ sudo chmod +x /opt/material-decoration-bt/chwm.sh
 sudo ln -s /opt/material-decoration-bt/bt-opacity.sh /usr/bin/bt-opacity
 sudo rm /opt/material-decoration-bt/setup.sh
 sudo rm -rf /opt/material-decoration-bt/build/*
-echo 'Installed target bt-opacity'
-echo 'Installed target chwm'
 echo 'Run bt-opacity anywhere to change theme transparency at runtime.'
-echo 'Done (2/2)'
+echo 'Done copying and setting up (2/2)'
  
