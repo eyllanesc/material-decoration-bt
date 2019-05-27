@@ -30,11 +30,14 @@ git clone https://github.com/yagomont/material-decoration-bt.git
 `
 cd material-decoration-bt; bash setup.sh
 `
-## Changing opacity at runtime
-Run `bt-opacity`anywhere.
-## Installing (manual, may not work as desired)
+
+OR (If you think bt-opacity is trash/bloat/malware, this will not install it.)
+
 `
 cd material-decoration-bt/build;
 cmake -DCMAKE_INSTALL_PREFIX=/usr .. ;
 sudo make -j4 install
 `
+
+## Changing opacity at runtime
+Run `bt-opacity`anywhere.
