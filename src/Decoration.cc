@@ -106,7 +106,7 @@ Decoration::~Decoration()
 
 void Decoration::paint(QPainter *painter, const QRect &repaintRegion)
 {
-    auto *decoratedClient = client().data();
+    auto *decoratedClient = client().toStrongRef().data();
 
     if (!decoratedClient->isShaded()) {
         paintFrameBackground(painter, repaintRegion);
@@ -119,7 +119,7 @@ void Decoration::paint(QPainter *painter, const QRect &repaintRegion)
 
 void Decoration::init()
 {
-    auto *decoratedClient = client().data();
+    auto *decoratedClient = client().toStrongRef().data();
 
     connect(decoratedClient, &KDecoration2::DecoratedClient::widthChanged,
             this, &Decoration::updateTitleBar);
@@ -199,7 +199,7 @@ void Decoration::updateResizeBorders()
 
 void Decoration::updateTitleBar()
 {
-    auto *decoratedClient = client().data();
+    auto *decoratedClient = client().toStrongRef().data();
     setTitleBar(QRect(0, 0, decoratedClient->width(), titleBarHeight()));
 }
 
@@ -294,7 +294,7 @@ void Decoration::paintFrameBackground(QPainter *painter, const QRect &repaintReg
 {
     Q_UNUSED(repaintRegion)
 
-    const auto *decoratedClient = client().data();
+    const auto *decoratedClient = client().toStrongRef().data();
 
     painter->save();
 
@@ -314,7 +314,7 @@ void Decoration::paintFrameBackground(QPainter *painter, const QRect &repaintReg
 
 QColor Decoration::titleBarBackgroundColor() const
 {
-    const auto *decoratedClient = client().data();
+    const auto *decoratedClient = client().toStrongRef().data();
     const auto group = decoratedClient->isActive()
         ? KDecoration2::ColorGroup::Active
         : KDecoration2::ColorGroup::Inactive;
@@ -328,7 +328,7 @@ QColor Decoration::titleBarBackgroundColor() const
 
 QColor Decoration::titleBarForegroundColor() const
 {
-    const auto *decoratedClient = client().data();
+    const auto *decoratedClient = client().toStrongRef().data();
     const auto group = decoratedClient->isActive()
         ? KDecoration2::ColorGroup::Active
         : KDecoration2::ColorGroup::Inactive;
@@ -339,7 +339,7 @@ void Decoration::paintTitleBarBackground(QPainter *painter, const QRect &repaint
 {
     Q_UNUSED(repaintRegion)
 
-    const auto *decoratedClient = client().data();
+    const auto *decoratedClient = client().toStrongRef().data();
 
     painter->save();
     painter->setPen(Qt::NoPen);
@@ -352,7 +352,7 @@ void Decoration::paintCaption(QPainter *painter, const QRect &repaintRegion) con
 {
     Q_UNUSED(repaintRegion)
 
-    const auto *decoratedClient = client().data();
+    const auto *decoratedClient = client().toStrongRef().data();
 
     const int textWidth = settings()->fontMetrics().boundingRect(decoratedClient->caption()).width();
     const QRect textRect((size().width() - textWidth) / 2, 0, textWidth, titleBarHeight());

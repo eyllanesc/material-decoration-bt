@@ -34,7 +34,7 @@ namespace Material
 MaximizeButton::MaximizeButton(Decoration *decoration, QObject *parent)
     : DecorationButton(KDecoration2::DecorationButtonType::Maximize, decoration, parent)
 {
-    auto *decoratedClient = decoration->client().data();
+    auto *decoratedClient = decoration->client().toStrongRef().data();
     connect(decoratedClient, &KDecoration2::DecoratedClient::maximizeableChanged,
             this, &MaximizeButton::setVisible);
 

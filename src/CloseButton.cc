@@ -31,7 +31,7 @@ namespace Material
 CloseButton::CloseButton(Decoration *decoration, QObject *parent)
     : DecorationButton(KDecoration2::DecorationButtonType::Close, decoration, parent)
 {
-    auto *decoratedClient = decoration->client().data();
+    auto *decoratedClient = decoration->client().toStrongRef().data();
     connect(decoratedClient, &KDecoration2::DecoratedClient::closeableChanged,
             this, &CloseButton::setVisible);
 
@@ -84,7 +84,7 @@ QColor CloseButton::backgroundColor() const
     }
 
     if (isPressed()) {
-        auto *decoratedClient = deco->client().data();
+        auto *decoratedClient = deco->client().toStrongRef().data();
         return decoratedClient->color(
             KDecoration2::ColorGroup::Warning,
             KDecoration2::ColorRole::Foreground
@@ -92,7 +92,7 @@ QColor CloseButton::backgroundColor() const
     }
 
     if (isHovered()) {
-        auto *decoratedClient = deco->client().data();
+        auto *decoratedClient = deco->client().toStrongRef().data();
         return decoratedClient->color(
             KDecoration2::ColorGroup::Warning,
             KDecoration2::ColorRole::Foreground
